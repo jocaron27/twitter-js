@@ -1,7 +1,39 @@
-<h1>{{ title }}</h1>
-<p>This is a bare-bones template.</p>
-<ul>
-{% for tweet in tweets %}
-  <li>{{ tweet.content }}</li>
-{% endfor %}
-</ul>
+{% extends "layout.html" %}
+
+{% block content %}
+  
+  <div class="page-header">
+    <h1>Welcome to Twitter.js!</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg"><br>
+      <b>Your Name</b><br>
+      100 followers
+      {% if showForm %}
+      <div class="form">
+      <form action="/tweets" method="POST">
+        <label for="name_field">Name:</label>
+        <input name="name" type="text" id="name_field" />
+    
+        <label for="text_field">Text:</label>
+        <input name="text" type="text" id="text_field" style="width: 200px; height: 100px" />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+    {% endif %}
+    </div>
+    <div class="col-md-9">
+        
+      <!-- display tweets here -->
+      {% for tweet in tweets %}
+        <ul class="indiv-tweet">
+        <a href="/users/{{tweet.name}}"><li class="name">{{tweet.name}}</li></a>
+        <a href="/tweets/{{tweet.id}}"><li class = "message">{{tweet.content}}</li></a>
+        </ul>
+      {% endfor %}
+      
+    </div>
+  </div>
+    
+{% endblock %}
