@@ -10,7 +10,10 @@ const PORT = 3000;
 const tweetBank = require('./tweetBank');
 const routes = require('./routes');
 const bodyParser = require('body-parser');
+const { Client } = require('pg');
+const client = new Client();
 
+client.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(volleyball);
